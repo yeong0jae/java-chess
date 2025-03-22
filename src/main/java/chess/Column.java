@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 public enum Column {
 
     A,
@@ -10,6 +12,13 @@ public enum Column {
     F,
     G,
     H;
+
+    public static Column from(String col) {
+        return Arrays.stream(values())
+                .filter(column -> column.name().equals(col))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("col 입력 잘못함"));
+    }
 
     public boolean isFarLeft() {
         return ordinal() == 0;
@@ -49,5 +58,9 @@ public enum Column {
         }
 
         throw new IllegalStateException("움직일 수 없는 위치입니다.");
+    }
+
+    public static int getSize() {
+        return values().length;
     }
 }

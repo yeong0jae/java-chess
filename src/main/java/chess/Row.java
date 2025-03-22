@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Arrays;
+
 public enum Row {
 
     EIGHT,
@@ -10,6 +12,14 @@ public enum Row {
     THREE,
     TWO,
     ONE;
+
+    public static Row from(int r) {
+        return Arrays.stream(values())
+                .filter(row -> values().length - row.ordinal() == r)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("row 입력 잘못함"));
+    }
+
 
     public boolean isTop() {
         return ordinal() == 0;
@@ -49,5 +59,9 @@ public enum Row {
         }
 
         throw new IllegalStateException("움직일 수 없는 위치입니다.");
+    }
+
+    public static int getSize() {
+        return values().length;
     }
 }

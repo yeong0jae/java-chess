@@ -167,4 +167,8 @@ public record Position(
         }
         return this;
     }
+
+    public boolean isSame(Column column, Row row) {
+        return this.column == column && this.row == row;
+    }
 }
